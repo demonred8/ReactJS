@@ -28,7 +28,7 @@ function Counter() {
     if (intervalID) {
       clearInterval(intervalID);
       const newIntervalID = setInterval(() => {
-        setCount((count) => count + countStep);
+        setCount((count) => count - countStep);
       }, intervalMS);
       setIntervalID(newIntervalID);
     }
@@ -52,7 +52,7 @@ function Counter() {
   };
 
   const incrementStep = () => {
-    setCountStep((countStep += 10));
+    setCountStep((countStep += 10))
     if (intervalID) {
       clearInterval(intervalID);
       const newIntervalID = setInterval(() => {
@@ -63,7 +63,7 @@ function Counter() {
   };
 
   const decrementStep = () => {
-    setCountStep((countStep -= 10));
+    setCountStep((countStep -= 10))
     if (intervalID) {
       clearInterval(intervalID);
       const newIntervalID = setInterval(() => {
@@ -76,7 +76,7 @@ function Counter() {
   return (
     <div>
       <h1>{count}</h1>
-      <h2>{countStep} Count Step</h2>
+      <h2>{countStep}</h2>
       <h3>{intervalMS} Interval MS</h3>
       <button onClick={interval}>Start interval</button>
       <button onClick={increment}>Increment counter</button>
