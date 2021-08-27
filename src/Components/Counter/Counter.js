@@ -18,9 +18,9 @@ function Counter() {
   };
 
   const decrementMS = () => {
-    setIntervalMS(intervalMS -= 1000);
+    setIntervalMS((intervalMS -= 1000));
     if (intervalMS < 0) {
-      setIntervalMS(intervalMS = 0);
+      setIntervalMS((intervalMS = 0));
     }
     clearInterval(intervalID);
     const newIntervalID = setInterval(() => {
