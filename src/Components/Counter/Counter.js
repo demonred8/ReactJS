@@ -10,11 +10,13 @@ function Counter() {
 
   const incrementMS = () => {
     setIntervalMS((intervalMS += 1000));
-    clearInterval(intervalID);
-    const newIntervalID = setInterval(() => {
-      setCount((count) => count + 1);
-    }, intervalMS);
-    setIntervalID(newIntervalID);
+    if (intervalID) {
+      clearInterval(intervalID);
+      const newIntervalID = setInterval(() => {
+        setCount((count) => count + 1);
+      }, intervalMS);
+      setIntervalID(newIntervalID);
+    }
   };
 
   const decrementMS = () => {
@@ -22,11 +24,13 @@ function Counter() {
     if (intervalMS < 0) {
       setIntervalMS((intervalMS = 0));
     }
-    clearInterval(intervalID);
-    const newIntervalID = setInterval(() => {
-      setCount((count) => count + 1);
-    }, intervalMS);
-    setIntervalID(newIntervalID);
+    if (intervalID) {
+      clearInterval(intervalID);
+      const newIntervalID = setInterval(() => {
+        setCount((count) => count + 1);
+      }, intervalMS);
+      setIntervalID(newIntervalID);
+    }
   };
 
   const interval = (event) => {
