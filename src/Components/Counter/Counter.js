@@ -1,31 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function Counter() {
   const [count, setCount] = useState(0);
-  const [intervalID, setIntervalID] = useState(0)
+  const [intervalID, setIntervalID] = useState(0);
 
-  function increment() {
-    setCount(count + 1);
-  }
+  const increment = () => setCount(count + 1);
 
-  function decrement() {
-    setCount(count - 1);
-  }
+  const decrement = () => setCount(count - 1);
 
-  function interval(event) {
-    if(intervalID) {
+  const interval = (event) => {
+    if (intervalID) {
       clearInterval(intervalID);
       setIntervalID(0);
-      setCount(0)
-      event.target.textContent = 'Start interval'
-      return
+      setCount(0);
+      event.target.textContent = "Start interval";
+      return;
     }
     const newIntervalID = setInterval(() => {
       setCount((count) => count + 1);
     }, 1000);
     setIntervalID(newIntervalID);
-    event.target.textContent = 'Stop interval'
-  }
+    event.target.textContent = "Stop interval";
+  };
 
   return (
     <div>
