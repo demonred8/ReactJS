@@ -2,89 +2,68 @@ import React, { useState } from "react";
 
 function Counter() {
   const [count, setCount] = useState(0);
-  let [countStep, setCountStep] = useState(1);
-  const [intervalID, setIntervalID] = useState(0);
-  let [intervalMS, setIntervalMS] = useState(1000);
+  const [countStep, setCountStep] = useState(1);
+  const [intervalID, setIntervalID] = useState(null);
+  const [intervalMS, setIntervalMS] = useState(1000);
 
-  const increment = () => setCount(count + countStep);
-  const decrement = () => setCount(count - countStep);
-
-  const incrementMS = () => {
-    setIntervalMS((intervalMS += 1000));
+  const interval = () => {
     if (intervalID) {
       clearInterval(intervalID);
-      const newIntervalID = setInterval(() => {
-        setCount((count) => count + countStep);
-      }, intervalMS);
-      setIntervalID(newIntervalID);
-    }
-  };
-
-  const decrementMS = () => {
-    setIntervalMS((intervalMS -= 1000));
-    if (intervalMS < 0) {
-      setIntervalMS((intervalMS = 0));
-    }
-    if (intervalID) {
-      clearInterval(intervalID);
-      const newIntervalID = setInterval(() => {
-        setCount((count) => count - countStep);
-      }, intervalMS);
-      setIntervalID(newIntervalID);
-    }
-  };
-
-  const interval = (event) => {
-    if (intervalID) {
-      clearInterval(intervalID);
-      setIntervalID(0);
-      setIntervalMS(1000);
-      setCountStep(1);
-      setCount(0);
-      event.target.textContent = "Start interval";
+      setIntervalID(null);
     } else {
       const newIntervalID = setInterval(() => {
         setCount((count) => count + countStep);
       }, intervalMS);
       setIntervalID(newIntervalID);
-      event.target.textContent = "Stop interval";
     }
   };
 
-  const incrementStep = () => {
-    setCountStep((countStep += 10))
+  const setCountStepValue = (event) => {
+    const newCountStep = Number(event.target.value);
+    setCountStep(newCountStep);
     if (intervalID) {
       clearInterval(intervalID);
       const newIntervalID = setInterval(() => {
-        setCount((count) => count + countStep);
+        setCount((count) => count + newCountStep);
       }, intervalMS);
       setIntervalID(newIntervalID);
     }
   };
 
-  const decrementStep = () => {
-    setCountStep((countStep -= 10))
+  const setIntervalMSValue = (event) => {
+    const newIntervalMs = Number(event.target.value);
+    setIntervalMS(newIntervalMs);
     if (intervalID) {
       clearInterval(intervalID);
       const newIntervalID = setInterval(() => {
         setCount((count) => count + countStep);
-      }, intervalMS);
+      }, newIntervalMs);
       setIntervalID(newIntervalID);
     }
   };
 
   return (
     <div>
-      <h1>{count}</h1>
-      <h2>{countStep}</h2>
-      <h3>{intervalMS} Interval MS</h3>
-      <button onClick={interval}>Start interval</button>
-      <button onClick={increment}>Increment counter</button>
-      <button onClick={decrement}>Decrement counter</button>
-      <button onClick={incrementStep}>Increment counter Step by 10</button>
-      <button onClick={decrementStep}>Decrement counter Step by 10</button>
-      <button onClick={incrementMS}>Interval MS +</button>
-      <button onClick={decrementMS}>Interval MS -</button>
+      <h1>Counter: {count}</h1>
+      <div>
+        <span>Count step: </span>
+        <input
+          type="number"
+          onChange={setCountStepValue}
+          placeholder="Count step"
+        ></input>
+      </div>
+      <div>
+        <span>IntervalMS: </span>
+        <input
+          type="number"
+          onChange={setIntervalMSValue}
+          placeholder="Interval MS"
+        ></input>
+      </div>
+      <button onClick={interval}>
+        {intervalID ? "Stop Interval" : "Start Interval"}
+      </button>
     </div>
   );
 }
