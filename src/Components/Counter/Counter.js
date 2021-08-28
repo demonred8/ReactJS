@@ -6,6 +6,9 @@ function Counter() {
   const [intervalID, setIntervalID] = useState(null);
   const [intervalMS, setIntervalMS] = useState(1000);
 
+  const incrementCount = () => setCount(count + countStep);
+  const decrementCount = () => setCount(count - countStep);
+
   const interval = () => {
     if (intervalID) {
       clearInterval(intervalID);
@@ -49,7 +52,7 @@ function Counter() {
         <span>Count step: </span>
         <input
           type="number"
-          defaultValue={countStep}
+          value={countStep}
           onChange={setCountStepValue}
           placeholder="Count step"
         ></input>
@@ -58,7 +61,7 @@ function Counter() {
         <span>IntervalMS: </span>
         <input
           type="number"
-          defaultValue={intervalMS}
+          value={intervalMS}
           onChange={setIntervalMSValue}
           placeholder="Interval MS"
         ></input>
@@ -66,6 +69,8 @@ function Counter() {
       <button onClick={interval}>
         {intervalID ? "Stop Interval" : "Start Interval"}
       </button>
+      <button onClick={incrementCount}>{`Counter + ${countStep}`}</button>
+      <button onClick={decrementCount}>{`Counter - ${countStep}`}</button>
     </div>
   );
 }
