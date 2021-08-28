@@ -49,6 +49,7 @@ function Counter() {
         <span>Count step: </span>
         <input
           type="number"
+          defaultValue={countStep}
           onChange={setCountStepValue}
           placeholder="Count step"
         ></input>
@@ -57,6 +58,7 @@ function Counter() {
         <span>IntervalMS: </span>
         <input
           type="number"
+          defaultValue={intervalMS}
           onChange={setIntervalMSValue}
           placeholder="Interval MS"
         ></input>
